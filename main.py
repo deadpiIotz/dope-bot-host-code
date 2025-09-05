@@ -4,6 +4,7 @@ import logging
 from dotenv import load_dotenv
 import os
 import webserver
+import random
 
 load_dotenv()
 token = os.getenv('DISCORD_TOKEN')
@@ -15,7 +16,26 @@ intents.members = True
 
 bot = commands.Bot(command_prefix='.', intents=intents)
 
+playlist = [
+    "https://youtu.be/Kza-X1x0URU?si=vZHBWEGY0LhsfOG4",
+    "https://youtu.be/ZzjCiz-95Bc?si=iljAVeA-OX8RKOEd",
+    "https://youtu.be/x72xck3LKtE?si=lELYYGAsoGlPUwRz",
+    "https://youtu.be/pgB9LgjO4yE?si=P36x9KHL0mY7T9B7",
+    "https://youtu.be/O_wwhFohA4Q?si=GKdEytd8SCiIzsjC",
+    "https://youtu.be/AvMn7tjkEbQ?si=RzCwrMpbeaUNMSIa",
+    "https://youtu.be/i11GrzvsB80?si=jFvUYc-HKjjM8WhG",
+    "https://youtu.be/rQ7OiGMv6wU?si=_5nQH212IxhX8u3z",
+    "https://youtu.be/S3E2NDOTiBY?si=xKn6egZ30ySXtO_T",
+    "https://youtu.be/Sro78dNMPiA?si=zd4TqXfb1w4HVK-w",
+    "https://youtu.be/6sUmOXK2JU8?si=gXzjpR8p0TmSmz29",
+    "https://youtu.be/cpZQy4K5qZQ?si=kWG5C2Z1WFZLhFud",
+    "https://youtu.be/uW9FkHYvriw?si=P_6Uevh7LYTSq0Dn",
+    ]
+
+
+
 secret_role = "dope mf"
+
 
 @bot.event
 async def on_ready():
@@ -35,6 +55,11 @@ async def on_message(message):
         await message.channel.send(f"{message.author.mention} - never bring that shit ass band up again bruh")
 
     await bot.process_commands(message)
+
+@bot.command()
+async def song(ctx):
+    song: object = random.choice(playlist)
+    await ctx.send(f"check this sick shit out bro {song}")
 
 @bot.command()
 async def hi(ctx):
